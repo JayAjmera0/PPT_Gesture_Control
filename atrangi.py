@@ -31,19 +31,20 @@ while True:
                 cx, cy = int(lm.x * w), int(lm.y * h)
                 handPoints.append((cx, cy))
 
-        if not left and handPoints[8][0] < 200:
-            left = True
-            pyautogui.press('left')
-            print("Gesture Detected: Move Left")
+        if not writing_mode:  # Check if writing mode is off
+            if not left and handPoints[8][0] < 200:
+                left = True
+                pyautogui.press('left')
+                print("Gesture Detected: Move Left")
 
-        if not right and handPoints[8][0] > 440:
-            right = True
-            pyautogui.press('right')
-            print("Gesture Detected: Move Right")
+            if not right and handPoints[8][0] > 440:
+                right = True
+                pyautogui.press('right')
+                print("Gesture Detected: Move Right")
 
-        if 200 <= handPoints[8][0] <= 440:
-            left = False
-            right = False
+            if 200 <= handPoints[8][0] <= 440:
+                left = False
+                right = False
 
         # Check if all five fingers are up
         if len(handPoints) == 21:
