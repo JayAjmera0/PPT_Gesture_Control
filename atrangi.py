@@ -29,7 +29,7 @@ def is_fist_detected(handPoints):
     
     # Check if fingertips are close to the base of any finger, indicating a closed hand
     for tip in finger_tips:
-        if all((tip[0] - base[0])**2 + (tip[1] - base[1])**2 > 4**2 for base in finger_bases):
+        if all((tip[0] - base[0])**2 + (tip[1] - base[1])**2 > 30**2 for base in finger_bases):
             return False  # A fingertip is too far from the bases, not a fist
     
     # Additional checks can be added here based on the specific requirements

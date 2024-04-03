@@ -27,7 +27,7 @@ delayCounter = 0
 annotations = [[]]
 annotationNumber = -1
 annotationStart = False
-hs, ws = int(120 * 1), int(213 * 1)  # width and height of small image
+hs, ws = int(120 * 1), int(23 * 1)  # width and height of small image
 
 # Get list of presentation images
 pathImages = sorted(os.listdir(folderPath), key=len)
