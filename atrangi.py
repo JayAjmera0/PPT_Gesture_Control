@@ -67,15 +67,22 @@ while True:
                 pyautogui.sleep(1)  # Prevent immediate re-toggle
 
             # Left and right functionality
-            elif not left and handPoints[8][0] < 200:  # Adjust this threshold for left gesture
-                left = True
-                pyautogui.press('left')  # Simulate left arrow key press to move to the previous slide
-                print("Gesture Detected: Move Left")
+            else:
+            
+                if not left and handPoints[8][0] < 200:  # Adjust this threshold for left gesture
+                    left = True
+                    pyautogui.press('left')  # Simulate left arrow key press to move to the previous slide
+                    print("Gesture Detected: Move Left")
 
-            if not right and handPoints[8][0] > 440:  # Adjust this threshold for right gesture
-                right = True
-                pyautogui.press('right')  # Simulate right arrow key press to move to the next slide
-                print("Gesture Detected: Move Right")
+                if not right and handPoints[8][0] > 440:  # Adjust this threshold for right gesture
+                    right = True
+                    pyautogui.press('right')  # Simulate right arrow key press to move to the next slide
+                    print("Gesture Detected: Move Right")
+
+                if 200 <= handPoints[8][0] <= 440:
+                    right = False
+                    left = False
+
 
         else:
             # Check for fist to deactivate writing mode
