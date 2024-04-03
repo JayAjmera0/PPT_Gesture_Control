@@ -12,17 +12,29 @@ cap = cv2.VideoCapture(0)
 cap.set(3, 640)  # Width
 cap.set(4, 480)  # Height
 
-# Function to detect a fist
 def is_fist_detected(handPoints):
-    palm_base = handPoints[0]
-    finger_tips = [handPoints[i] for i in [4, 8, 12, 16, 20]]
-    distance_threshold = 50
+    """
+    Determines if the hand configuration represents a fist.
     
+    Parameters:
+    handPoints (list of tuples): Coordinates of hand landmarks.
+    
+    Returns:
+    bool: True if a fist is detected, False otherwise.
+    """
+    # Getting base points of the fingers and the palm
+    palm_base = handPoints[0]
+    finger_bases = [handPoints[i] for i in [5, 9, 13, 17]]  # Base of each finger
+    finger_tips = [handPoints[i] for i in [4, 8, 12, 16, 20]]  # Tips of the fingers
+    
+    # Check if fingertips are close to the base of any finger, indicating a closed hand
     for tip in finger_tips:
-        distance = ((tip[0] - palm_base[0]) ** 2 + (tip[1] - palm_base[1]) ** 2) ** 0.5
-        if distance > distance_threshold:
-            return False
+        if all((tip[0] - base[0])**2 + (tip[1] - base[1])**2 > 4**2 for base in finger_bases):
+            return False  # A fingertip is too far from the bases, not a fist
+    
+    # Additional checks can be added here based on the specific requirements
     return True
+
 
 # Flags
 writing_mode = False
