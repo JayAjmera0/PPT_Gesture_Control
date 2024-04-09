@@ -57,6 +57,7 @@ laser_mode = False
 left = False
 right = False
 
+senstivity = 15
 while True:
     success, img = cap.read()
     img = cv2.flip(img, 1)
@@ -122,7 +123,7 @@ while True:
                 print("Mouse Up")
 
             # Move mouse pointer following the index finger
-            pyautogui.moveTo(handPoints[8][0], handPoints[8][1])
+            pyautogui.moveTo(handPoints[8][0] + senstivity, handPoints[8][1]+ senstivity)
 
         elif laser_mode:
             # Check for fist to deactivate laser mode
@@ -131,7 +132,7 @@ while True:
                 laser_mode = False
                 print("Laser mode off")
                 pyautogui.sleep(1)
-            pyautogui.moveTo(handPoints[8][0], handPoints[8][1])
+            pyautogui.moveTo(handPoints[8][0] + senstivity, handPoints[8][1] + senstivity)
 
 
     cv2.imshow("Video", img)
