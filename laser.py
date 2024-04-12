@@ -32,7 +32,6 @@ def is_fist_detected(handPoints):
         if all((tip[0] - base[0])**2 + (tip[1] - base[1])**2 > 30**2 for base in finger_bases):
             return False  # A fingertip is too far from the bases, not a fist
     
-    # Additional checks can be added here based on the specific requirements
     return True
 
 def is_laser_detected(handPoints):
@@ -57,7 +56,7 @@ laser_mode = False
 left = False
 right = False
 
-senstivity = 15
+senstivity = 0
 while True:
     success, img = cap.read()
     img = cv2.flip(img, 1)
@@ -87,6 +86,7 @@ while True:
             elif is_laser_detected(handPoints):
                 pyautogui.hotkey('ctrl', 'l')
                 laser_mode = True
+                pyautogui.sleep(1)  # Prevent immediate re-toggle
                 print("Laser mode on")
 
             # Left and right functionality
@@ -131,7 +131,6 @@ while True:
                 pyautogui.press('esc')
                 laser_mode = False
                 print("Laser mode off")
-                pyautogui.sleep(1)
             pyautogui.moveTo(handPoints[8][0] + senstivity, handPoints[8][1] + senstivity)
 
 
